@@ -53,4 +53,16 @@ class Daily{
     }
     return f[n - 1][m - 1];
   }
+
+  // https://leetcode-cn.com/problems/chalkboard-xor-game/
+  bool xorGame(List<int> array){
+    if(array.length % 2 == 0)return true;
+    else{
+      int sum = 0;
+      for(int num in array){
+        sum ^= num;
+      }
+      return sum == 0;
+    }
+  }
 }
