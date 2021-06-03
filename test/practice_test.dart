@@ -24,4 +24,28 @@ void main() {
   test('5,21', (){
     expect(daily.maxUncrossedLines([2,5,1,2,5], [10,5,2,1,5,2]),3);
   });
+
+  test((""),(){
+    expect(daily.reverseParentheses("a(bcdefghijkl(mno)p)q"),"apmnolkjihgfedcbq");
+  });
+
+  test(("hammingDistance"
+  ),(){
+    expect(daily.hammingDistance(1,4), 2);
+  });
+
+  test((""),(){
+    int a = 12;
+    print("answer" +  (a & 1).toString());
+
+  });
+
+  test(("525. 连续数组"),(){
+    expect(daily.findMaxLength([0,1,0]), 2);
+  });
+
+  test(("523. 连续的子数组和"),(){
+    expect(daily.checkSubarraySum([23,2,4,6,7],6), true);
+  });
+
 }

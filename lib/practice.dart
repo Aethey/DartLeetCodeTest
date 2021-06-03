@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 class Practice {
 // https://leetcode-cn.com/problems/decode-xored-array/
   List<int> decode(List<int> encoded, int first) {
@@ -74,4 +76,33 @@ class Practice {
     return s.substring(begin, begin + maxLen);
   }
 
+// https://leetcode-cn.com/problems/reverse-substrings-between-each-pair-of-parentheses/
+
+  String reverseParentheses(String s) {
+    var len = s.length;
+    var pair = [len];
+    var stack = DoubleLinkedQueue<int>();
+    for (int i = 0; i < len; i++) {
+      if (s[i] == '(') {
+        stack.addFirst(i);
+      } else if (s[i] == ')') {
+        var j = stack.removeFirst();
+        pair[i] = j;
+        pair[j] = i;
+      }
+    }
+
+    var sb = StringBuffer();
+    var index = 0, step = 1;
+    while (index < len) {
+      if (s[index] == '(' || s[index] == ')') {
+        index = pair[index];
+        step = -step;
+      } else {
+        sb.write(s[index]);
+      }
+      index += step;
+    }
+    return sb.toString();
+  }
 }
