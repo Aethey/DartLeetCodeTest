@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:math';
+import 'dart:math';
 
 class Daily {
   // https://leetcode-cn.com/problems/xor-operation-in-an-array/
@@ -168,5 +169,23 @@ class Daily {
       }
     }
     return maxLen;
+  }
+
+  // https://leetcode-cn.com/problems/stone-game/
+  bool stoneGame(List<int> piles) {
+    int n = piles.length;
+    List<List<int>> f = List.generate(
+        n + 2, (index) => List<int>.generate(n + 2, (index) => 0));
+    for (int len = 1; len <= n; len++) {
+      // dp
+      for (int l = 1; l + len - 1 <= n; l++) {
+        // left
+        int r = l + len - 1; // right
+        int a = piles[l - 1] - f[l + 1][r];
+        int b = piles[r - 1] - f[l][r - 1];
+        f[l][r] = max(a, b);
+      }
+    }
+    return f[1][n] > 0;
   }
 }

@@ -105,4 +105,8 @@ class Practice {
     }
     return sb.toString();
   }
+
+  int doTest(int x){
+    return x ^= 4;
+  }
 }

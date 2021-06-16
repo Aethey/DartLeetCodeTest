@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   final daily = Daily();
+  final practice = Practice();
   test('let us test', () {
     final practice = Practice();
 
@@ -46,6 +47,15 @@ void main() {
 
   test(("523. 连续的子数组和"),(){
     expect(daily.checkSubarraySum([23,2,4,6,7],6), true);
+  });
+
+  // test((''),(){
+  //   expect(practice.doTest(3), 0);
+  // });
+
+
+  test((''),(){
+    expect(daily.stoneGame([5,3,4,5]), true);
   });
 
 }
