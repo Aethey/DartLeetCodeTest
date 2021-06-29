@@ -58,4 +58,19 @@ void main() {
     expect(daily.stoneGame([5,3,4,5]), true);
   });
 
+
+  test((''),(){
+    practice.getTakoAndIKaCount(2, 18);
+    practice.getTakoAndIKaCount2(2, 18);
+  });
+
+
+  test((''),(){
+    int a = 5;
+    int b = a--;
+    print('a:$a');
+    print('b:$b');
+
+  });
+
 }

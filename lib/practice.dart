@@ -1,5 +1,9 @@
 import 'dart:collection';
 
+import 'dart:html';
+
+import 'dart:math';
+
 class Practice {
 // https://leetcode-cn.com/problems/decode-xored-array/
   List<int> decode(List<int> encoded, int first) {
@@ -106,7 +110,176 @@ class Practice {
     return sb.toString();
   }
 
-  int doTest(int x){
+  int doTest(int x) {
     return x ^= 4;
+  }
+
+  /// タコとイカそれぞれの数を計算
+  /// n タコとイカの数
+  /// m タコとイカの足の数
+  void getTakoAndIKaCount(int n, int m) {
+    int takoCount = 0;
+    int ikaCount = n - 0;
+    while (takoCount <= n) {
+      if ((takoCount * 8 + ikaCount * 10) == m) {
+        print('タコの数は$takoCountの場合,イカの数は$ikaCount');
+      }
+      takoCount++;
+      ikaCount--;
+    }
+  }
+
+  /// タコとイカそれぞれの数を計算
+  /// n タコとイカの数
+  /// m タコとイカの足の数
+  void getTakoAndIKaCount2(int n, int m) {
+    int takoCount = 0;
+    int ikaCount = 0;
+    if ((m - n * 8) % 2 == 0) {
+      ikaCount = (m - n * 8) ~/ 2;
+      takoCount = n - ikaCount;
+      print('other');
+      print('タコの数は$takoCountの場合,イカの数は$ikaCount');
+    } else {
+      print('数字が合わないです。');
+    }
+  }
+
+  // https://leetcode-cn.com/problems/merge-sorted-array/submissions/
+
+  // time complexity: O(m+n)
+  // space complexity: O(1)
+  void merge(List<int> nums1, int m, List<int> nums2, int n) {
+    int p1 = m - 1, p2 = n - 1;
+    int cur;
+    int tail = m + n - 1;
+    while (p1 >= 0 || p2 >= 0) {
+      if (p1 == -1) {
+        cur = nums2[p2--];
+      } else if (p2 == -1) {
+        cur = nums1[p1--];
+      } else if (nums1[p1] > nums2[p2]) {
+        cur = nums1[p1--];
+      } else {
+        cur = nums2[p2--];
+      }
+      nums1[tail--] = cur;
+    }
+  }
+
+  // time complexity: O(nums.length)
+  // space complexity: O(1)
+  int removeDuplicates(List<int> nums) {
+    int k = 2, u = 0;
+    for (int num in nums) {
+      if (u < k || nums[u - k] != num) {
+        nums[u++] = num;
+      }
+    }
+    return u;
+  }
+
+  int removeDuplicates2(List<int> nums) {
+    int n = nums.length;
+    if (n < 2) {
+      return n;
+    }
+    int slow = 2, fast = 2;
+    while (fast < n) {
+      if (nums[slow - 2] != nums[fast]) {
+        nums[slow] = nums[fast];
+        slow++;
+      }
+      fast++;
+    }
+    return slow;
+  }
+
+  bool search(List<int> nums, int target) {
+    int len = nums.length;
+    int l = 0, r = len - 1;
+    while (l < r && nums[0] == nums[r]) r--;
+
+    while (l < r) {
+      int mid = l + r + 1 >> 1;
+      if (nums[mid] >= nums[0]) {
+        l = mid;
+      } else {
+        r = mid - 1;
+      }
+    }
+
+    int idx = len;
+    if (nums[r] >= nums[0] && r + 1 < len) idx = r + 1;
+    int ans = find(nums, 0, idx - 1, target);
+    if (ans != -1) return true;
+    ans = find(nums, idx, len - 1, target);
+    return ans != -1;
+  }
+
+  int find(List<int> nums, int l, int r, int t) {
+    while (l < r) {
+      int mid = l + r + 1 >> 1;
+      if (nums[mid] > t) {
+        r = mid;
+      } else {
+        l = mid + 1;
+      }
+    }
+    return nums[r] == t ? r : -1;
+  }
+
+  bool search2(List<int> nums, int target) {
+    int len = nums.length;
+    int l = 0;
+    int r = len - 1;
+    while (l < r && nums[0] == nums[r]) r--;
+    while (l < r) {
+      int mid = l + r + 1 >> 1;
+      if (nums[mid] > target) {
+        l = mid;
+      } else {
+        r = mid + 1;
+      }
+    }
+
+    int idx = len;
+    if (nums[r] >= nums[0] && r + 1 < len) idx = r + 1;
+    int ans = find2(0, idx - 1, nums, target);
+    if (ans != -1) return true;
+    ans = find2(idx, len - 1, nums, target);
+    return ans != -1;
+  }
+
+  int find2(int l, int r, List<int> nums, int t) {
+    while (l < r) {
+      int mid = l + r + 1 >> 1;
+      if (nums[mid] > t) {
+        l = mid;
+      } else {
+        r = mid + 1;
+      }
+    }
+    return nums[r] == t ? t : -1;
+  }
+
+  int maxSubArray(List<int> nums) {
+    int pre = 0, maxAns = nums[0];
+    for (int x in nums) {
+      pre = max(pre + x, x);
+      maxAns = max(maxAns, pre);
+    }
+    return maxAns;
+  }
+
+  void stepDp(int x) {
+    List<int> dp = List.filled(x, 0);
+    dp[1] = 1;
+    dp[2] = 2;
+
+    for (int step = 3; step <= x; step++) {
+      dp[step] = dp[step - 1] + dp[step - 2];
+    }
+    print('${dp[x]}');
   }
 }
