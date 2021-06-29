@@ -46,15 +46,15 @@ class PokerPage extends StatelessWidget {
                             width: size.width / 10,
                             height: 100,
                             child: Container(
-                              color: Colors.grey,
+                              color: Colors.black,
                               margin: const EdgeInsets.all(2.0),
                               child: Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text('${snapshot.data.cards[index].value}'),
-                                    Text('${snapshot.data.cards[index].suit}'),
+                                    Text('${snapshot.data.cards[index].value}',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+                                    Text('${snapshot.data.cards[index].suit}',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue)),
                                   ],
                                 ),
                               ),
