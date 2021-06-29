@@ -66,10 +66,12 @@ void main() {
 
 
   test((''),(){
-    int a = 5;
-    int b = a--;
-    print('a:$a');
-    print('b:$b');
+      List<int> array = [1,1,3,3,5];
+      int x = 0;
+      array.forEach((element) {
+        x ^= element;
+      });
+      print('this is $x');
 
   });
 
