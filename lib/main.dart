@@ -1,3 +1,4 @@
+import 'package:dart_leetcode_demo/widget/poker_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home:PokerPage(),
     );
   }
 }
