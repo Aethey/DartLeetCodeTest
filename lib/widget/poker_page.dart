@@ -9,6 +9,7 @@ class PokerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     getPokers();
     return Scaffold(
       body: SafeArea(
@@ -29,9 +30,39 @@ class PokerPage extends StatelessWidget {
 
               return Center(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('$poker'),
                     Text('$value'),
+                    Container(
+                      width: size.width / 2,
+                      height: 100,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: snapshot.data.cards.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            width: size.width / 10,
+                            height: 100,
+                            child: Container(
+                              color: Colors.grey,
+                              margin: const EdgeInsets.all(2.0),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text('${snapshot.data.cards[index].value}'),
+                                    Text('${snapshot.data.cards[index].suit}'),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                     ElevatedButton(
                         onPressed: () {
                           getPokers();
@@ -149,5 +180,9 @@ class PokerPage extends StatelessWidget {
           return 0;
       }
     }
+  }
+
+  void close() {
+    _streamController.close();
   }
 }
