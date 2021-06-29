@@ -1,7 +1,4 @@
 import 'dart:collection';
-
-import 'dart:html';
-
 import 'dart:math';
 
 class Practice {

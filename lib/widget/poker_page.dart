@@ -46,7 +46,6 @@ class PokerPage extends StatelessWidget {
   String getMaxValue(PokerEntity pokerEntity) {
     Map<String, String> pokerMap = Map();
     Map<String, String> pokerMapR = Map();
-    int numsTemp = 0;
     List<int> values = [];
 
     pokerEntity.cards.forEach((element) {
@@ -65,27 +64,20 @@ class PokerPage extends StatelessWidget {
       }
     }
     values.sort();
-    bool isNine = true;
-    int sameValueNum = 0;
-    for (int i = 0; i < 4; i++) {
-      int result = values[i + 1] - values[i];
-      if (result != 1) {
-        isNine = false;
-      }
-      if (result == 0) {
-        sameValueNum++;
-      } else {
-        sameValueNum--;
-      }
+    int valueSum1 = 0;
+    int valueSum2 = values[0];
+    for (int i = 0; 0 < values.length; i++) {
+      valueSum1 += values[i];
+      valueSum2 += valueSum2 + 1;
     }
+    bool isContinuous = valueSum1 == valueSum2;
 
-    if (pokerMapR.length == 1 && isNine) {
+    if (pokerMapR.length == 1 && isContinuous) {
       return 'ストレートフラッシュ(ストレートででかつフラッシュ) ';
     }
     if (pokerMap.length == 2) {
       int witchHouse = 0;
       for (int i = 0; i < values.length - 1; i++) {}
-
       values.forEach((element) {
         if (element == getIntValue(pokerMap.keys.first)) {
           witchHouse++;
@@ -97,12 +89,11 @@ class PokerPage extends StatelessWidget {
         return 'フルハウス(ワンペアとスリーカード)';
       }
     }
-
     if (pokerMap.length == 1) {
       return 'フラッシュ(同じ柄が5枚)';
     }
 
-    if (isNine) {
+    if (isContinuous) {
       return 'ストレート(連番で5枚、柄は自由)';
     }
 
@@ -110,10 +101,10 @@ class PokerPage extends StatelessWidget {
       return 'スリーカード (同じ数字のカードが3つある)';
     }
     if (pokerMap.length == 4) {
-      return 'ツーペア (同じ数字のペアが2つある)';
+      return 'ワンペア(同じ数字のペアが1つある)';
     }
 
-    return '';
+    return 'ハイカード(役のない状態)';
   }
 
   int getIntValue(String value) {
